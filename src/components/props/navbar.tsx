@@ -26,12 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ hue }) => {
       className={'w-full flex flex-col mt-20 items-center'}
       style={{ color: hue }}
     >
-      <div className="mb-16 grid w-full grid-cols-1 md:grid-cols-5 gap-4">
-        <SiteLink
-          title="IG"
-          link="https://instagram.com/standardpointer"
-          content="pics"
-        />
+      <div className="mb-16 grid w-full grid-cols-1 md:grid-cols-4 gap-4">
         <SiteLink
           title="Blog"
           link="https://blog.standardpointer.com"

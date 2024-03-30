@@ -3,7 +3,7 @@ import Navbar from '../props/navbar';
 import '../components.css';
 import Typewriter, { LoadingSequence } from '../props/typing';
 import LoadingScreen from '../props/loading';
-import { BiChevronRight } from 'react-icons/bi/index';
+import { BiChevronRight } from 'react-icons/bi';
 
 /*
   This function includes the main landing page, with a corresponding light mode.
@@ -62,8 +62,8 @@ function Main() {
     const aboutMe = (
       <p className={buttonState === 'Normal' ? 'text-white' : 'text-black'}>
         + I'm standardpointer. I enjoy making electronic music and programming.
-        <br /> + I'm a site reliability engineer with have a strong interest in
-        cybersecurity. <br /> + I develop small stuff on my own, too.
+        <br /> + I'm a software engineer. <br /> + I develop small music plugins
+        on my own, too.
         <br />+ Check out the links above for things.
       </p>
     );
