@@ -1,17 +1,19 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 interface LoadingScreenProps {
   onProgressComplete: () => void;
 }
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({onProgressComplete}) => {
-  const progASCII = '▓ ';
+const LoadingScreen: React.FC<LoadingScreenProps> = ({
+  onProgressComplete,
+}) => {
+  const progASCII = "▓ ";
 
   const loadingASCII = `
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKkooook0KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK0o,,,,o0KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  000000000000000000000000000000000000000000000000ooook00000000000000000000000000000000000000000000000
+  00000000000000000000000000000000000000000000000o,,,,o00000000000000000000000000000000000000000000000
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK0kxkOKKKKKKKK0o,,,;o0KKKKKKKKOkxk0KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOl;,;ckKOkkkkkxc,,;;lxkkkkk0Kxc;;;o0KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOc,,,:xKx;;;;;;;,,;;;;;;;;:xKd;,;;lOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
@@ -22,14 +24,14 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({onProgressComplete}) => {
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOl,,,:xKKKKKKKKOxkkkOKKKKKKK0o,,;,ckKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOl,,,:xKKKKKKKKKKKKKKKKKKKKKKkl;,,:xKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
   KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK0xdxOKKKKKKKKKKKKKKKKKKKKKKKKx:,;lOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKkc;cdOKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKOkO0KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-  KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+  00000000000000000000000000000000000000000000000000000000000000c;cd0000000000000000000000000000000000
+  0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+  1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 `;
-  const [loadingText, setLoadingText] = useState<string>('Initializing...');
+  const [loadingText, setLoadingText] = useState<string>("Initializing...");
   const [progress, setProgress] = useState<number>(0);
-  const [doneASCII, setDoneASCII] = useState<string>('');
+  const [doneASCII, setDoneASCII] = useState<string>("");
   const parentRef = useRef(null);
   useEffect(() => {
     const parentWidth = parentRef.current.clientWidth;
@@ -38,25 +40,25 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({onProgressComplete}) => {
       onProgressComplete();
     }
     const loadingTextOptions = [
-      'Checking For Updates ...',
-      'Updating Drivers ...',
-      'Removing Ligatures Because They Suck ...',
-      'Writing Hello, World!',
-      'Hold on ...',
-      'Fetching data ...',
-      'Checking Cache ...',
-      'Reading Config ...'
+      "Checking For Updates ...",
+      "Updating Drivers ...",
+      "Removing Ligatures Because They Suck ...",
+      "Writing Hello, World!",
+      "Hold on ...",
+      "Fetching data ...",
+      "Checking Cache ...",
+      "Reading Config ...",
     ];
 
     const genLoad = setInterval(() => {
       if (progress < 100) {
-        setProgress(prevProgress =>
-          prevProgress < 100 ? prevProgress + 20 : prevProgress
+        setProgress((prevProgress) =>
+          prevProgress < 100 ? prevProgress + 20 : prevProgress,
         );
         setLoadingText(
           loadingTextOptions[
             Math.floor(Math.random() * loadingTextOptions.length)
-          ]
+          ],
         );
       }
       const doneWidth = (parentWidth * progress) / 100;
@@ -71,6 +73,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({onProgressComplete}) => {
     <body className="bg-black min-w-0 overflow-hidden">
       <div className="p-8 w-screen h-screen flex flex-col">
         <div className="min-w-0 h-screen flex flex-col items-center justify-center">
+          <p className="text-white">nifty</p>
           <span className="mb-2 whitespace-pre text-mainPurple">
             {loadingASCII}
           </span>
