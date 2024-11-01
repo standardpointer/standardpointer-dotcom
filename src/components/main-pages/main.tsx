@@ -53,7 +53,7 @@ function Main() {
             : 'text-black mr-12 text-sm'
         }
       >
-        zsh
+        ptr_lang
       </p>
     </div>
   );
@@ -62,9 +62,8 @@ function Main() {
     const aboutMe = (
       <p className={buttonState === 'Normal' ? 'text-white' : 'text-black'}>
         + I'm standardpointer. I enjoy making electronic music and programming.
-        <br /> + I'm a software engineer. <br /> + I develop small music plugins
-        on my own, too.
-        <br />+ Check out the links above for things.
+        <br /> + I'm a software engineer. <br />+ Check out the links above for
+        things.
       </p>
     );
 

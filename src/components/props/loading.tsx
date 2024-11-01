@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 interface LoadingScreenProps {
   onProgressComplete: () => void;
@@ -7,8 +7,6 @@ interface LoadingScreenProps {
 const LoadingScreen: React.FC<LoadingScreenProps> = ({
   onProgressComplete,
 }) => {
-  const progASCII = "▓ ";
-
   const loadingASCII = `
   1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
   1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -29,65 +27,66 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({
   1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
   1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 `;
-  const [loadingText, setLoadingText] = useState<string>("Initializing...");
+  const [loadingText, setLoadingText] = useState<string>('Initializing...');
   const [progress, setProgress] = useState<number>(0);
-  const [doneASCII, setDoneASCII] = useState<string>("");
-  const parentRef = useRef(null);
-  useEffect(() => {
-    const parentWidth = parentRef.current.clientWidth;
 
-    if (progress == 100) {
+  useEffect(() => {
+    if (progress === 100) {
       onProgressComplete();
+      return;
     }
     const loadingTextOptions = [
-      "Checking For Updates ...",
-      "Updating Drivers ...",
-      "Removing Ligatures Because They Suck ...",
-      "Writing Hello, World!",
-      "Hold on ...",
-      "Fetching data ...",
-      "Checking Cache ...",
-      "Reading Config ...",
+      'Checking For Updates ...',
+      'Updating Drivers ...',
+      'Hold on ...',
+      'Fetching data ...',
+      'Checking Cache ...',
+      'Reading Config ...',
     ];
 
-    const genLoad = setInterval(() => {
-      if (progress < 100) {
-        setProgress((prevProgress) =>
-          prevProgress < 100 ? prevProgress + 20 : prevProgress,
-        );
-        setLoadingText(
-          loadingTextOptions[
-            Math.floor(Math.random() * loadingTextOptions.length)
-          ],
-        );
-      }
-      const doneWidth = (parentWidth * progress) / 100;
-      const doneChars = Math.floor(doneWidth / 10);
-      setDoneASCII(progASCII.repeat(doneChars));
+    const progressLoad = setInterval(() => {
+      setProgress((prev) => {
+        const nextProgress = Math.min(prev + 10, 100);
+        if (nextProgress === 100) {
+          clearInterval(progressLoad);
+        }
+        return nextProgress;
+      });
+      setLoadingText(
+        loadingTextOptions[
+          Math.floor(Math.random() * loadingTextOptions.length)
+        ]
+      );
     }, 250);
-
-    return () => clearInterval(genLoad);
-  }, [progress, parentRef]);
+    return () => clearInterval(progressLoad);
+  }, [progress]);
 
   return (
-    <body className="bg-black min-w-0 overflow-hidden">
-      <div className="p-8 w-screen h-screen flex flex-col">
-        <div className="min-w-0 h-screen flex flex-col items-center justify-center">
-          <p className="text-white">nifty</p>
-          <span className="mb-2 whitespace-pre text-mainPurple">
-            {loadingASCII}
-          </span>
-          <div className="font-fira text-mainSilver loading-text">
-            {loadingText}
-          </div>
-          <div ref={parentRef} className=" h-[20px] w-[80%]">
-            <div className="min-w-0 text-mainSilver h-[100%] overflow-hidden">
-              <span className="text-white">{doneASCII}</span>
-            </div>
-          </div>
+    <div className="bg-black min-w-0 overflow-hidden w-screen h-screen flex flex-col justify-center items-center">
+      <p className="text-white text-2xl mb-2">nifty</p>
+      <span className="mb-8 whitespace-pre text-mainPurple text-center">
+        {loadingASCII}
+      </span>
+      <div className="relative flex items-center justify-center w-40 h-40">
+        <svg
+          className="absolute top-0 left-0 w-full h-full"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            className="stroke-current text-mainSilver fill-none transition-[stroke-dashoffset] duration-250 ease"
+            strokeWidth="4"
+            strokeDasharray="283"
+            strokeDashoffset={283 - (283 * progress) / 100}
+          />
+        </svg>
+        <div className="font-fira text-mainSilver loading-text text-md absolute text-center leading-tight">
+          {loadingText}
         </div>
       </div>
-    </body>
+    </div>
   );
 };
 
