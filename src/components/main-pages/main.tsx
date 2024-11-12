@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../props/navbar";
-import "../components.css";
-import Typewriter, { LoadingSequence } from "../props/typing";
-import LoadingScreen from "../props/loading";
-import { BiChevronRight } from "react-icons/bi";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../props/navbar';
+import '../components.css';
+import Typewriter, { LoadingSequence } from '../props/typing';
+import LoadingScreen from '../props/loading';
+import { BiChevronRight } from 'react-icons/bi';
 
 /*
   This function includes the main landing page, with a corresponding light mode.
 */
 
 function Main() {
-  const [buttonState, setButtonState] = useState("Normal");
+  const [buttonState, setButtonState] = useState('Normal');
   // Handler for the button click event
   const lightClick = () => {
-    setButtonState(buttonState === "Normal" ? "Light" : "Normal");
+    setButtonState(buttonState === 'Normal' ? 'Light' : 'Normal');
     console.log(buttonState);
   };
 
   const closeClick = () => {
-    console.log("Window Closed");
+    console.log('Window Closed');
   };
 
   const minimizeClick = () => {
-    console.log("Window Minimized");
+    console.log('Window Minimized');
   };
 
   const maximizeClick = () => {
-    console.log("Window maximized");
+    console.log('Window maximized');
   };
 
   // Define the initial state and a method to update it
@@ -48,9 +48,9 @@ function Main() {
       </div>
       <p
         className={
-          buttonState === "Normal"
-            ? "text-white mr-12 text-sm"
-            : "text-black mr-12 text-sm"
+          buttonState === 'Normal'
+            ? 'text-white mr-12 text-sm'
+            : 'text-black mr-12 text-sm'
         }
       >
         ptr_lang
@@ -60,7 +60,7 @@ function Main() {
 
   const ContentBody = () => {
     const aboutMe = (
-      <p className={buttonState === "Normal" ? "text-white" : "text-black"}>
+      <p className={buttonState === 'Normal' ? 'text-white' : 'text-black'}>
         + I'm standardpointer. I enjoy making electronic music and programming.
         <br /> + I'm a software engineer. <br />+ Check out the links above for
         things.
@@ -70,26 +70,26 @@ function Main() {
     return (
       <body
         className={
-          buttonState === "Normal"
-            ? "bg-black text-lg h-screen min-w-0 flex flex-col overflow-x-hidden"
-            : "bg-mainSilver text-lg h-screen min-w-0 flex flex-col overflow-x-hidden"
+          buttonState === 'Normal'
+            ? 'bg-black text-lg h-screen min-w-0 flex flex-col overflow-x-hidden'
+            : 'bg-mainSilver text-lg h-screen min-w-0 flex flex-col overflow-x-hidden'
         }
       >
         <Buttons />
         <div className="flex items-center justify-center">
           <button
             className={
-              buttonState === "Normal"
-                ? " text-white w-6 h-6 rounded-full border-mainPurple border-3 border-dashed"
-                : "text-black w-6 h-6 rounded-full border-mainPurple border-3 border-dashed"
+              buttonState === 'Normal'
+                ? ' text-white w-6 h-6 rounded-full border-mainPurple border-3 border-dashed'
+                : 'text-black w-6 h-6 rounded-full border-mainPurple border-3 border-dashed'
             }
             onClick={lightClick}
           >
-            [ INVERT ]
+            INVERT
           </button>
         </div>
         <div className="flex">
-          <Navbar hue={buttonState === "Normal" ? "white" : "black"} />
+          <Navbar hue={buttonState === 'Normal' ? 'white' : 'black'} />
         </div>
 
         <div className="flex justify-center" id="test">
@@ -106,10 +106,10 @@ function Main() {
           <LoadingSequence
             childElement={
               <span className="items-center flex text-textPurple">
-                /home/pointer <BiChevronRight size={24} color="textPurple" />{" "}
+                /home/pointer <BiChevronRight size={24} color="textPurple" />{' '}
                 $&emsp;
                 <Typewriter
-                  color={buttonState === "Normal" ? "white" : "black"}
+                  color={buttonState === 'Normal' ? 'white' : 'black'}
                   txt="pkg install standardpointer"
                   delay={10}
                 />
@@ -118,9 +118,9 @@ function Main() {
             childElement2={
               <p
                 className={
-                  buttonState === "Normal"
-                    ? "w-full text-white"
-                    : "w-full text-black"
+                  buttonState === 'Normal'
+                    ? 'w-full text-white'
+                    : 'w-full text-black'
                 }
               >
                 + standardpointer@1.0.0
@@ -132,10 +132,10 @@ function Main() {
           <LoadingSequence
             childElement={
               <span className="items-center flex text-textPurple">
-                /home/pointer <BiChevronRight size={24} color="textPurple" />{" "}
+                /home/pointer <BiChevronRight size={24} color="textPurple" />{' '}
                 $&emsp;
                 <Typewriter
-                  color={buttonState === "Normal" ? "white" : "black"}
+                  color={buttonState === 'Normal' ? 'white' : 'black'}
                   txt="whoami"
                   delay={20}
                 />
@@ -167,9 +167,9 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("firstLoadDone") === null) {
+    if (sessionStorage.getItem('firstLoadDone') === null) {
       setLoadingComplete(true);
-      sessionStorage.setItem("firstLoadDone", "1"); // Set the flag
+      sessionStorage.setItem('firstLoadDone', '1'); // Set the flag
     }
   }, []);
 
